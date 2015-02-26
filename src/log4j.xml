@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+	<appender name="Console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="debug" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %c{1} - %m%n" />
+		</layout>
+	</appender>
+	<appender name="LogFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="Threshold" value="debug" />
+		<param name="File" value="./rpc.log" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="MaxFileSize" value="50MB" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %c{1} - %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="com.ccb.iomp.mon.collector.trap">
+		<level value="debug" />
+		<appender-ref ref="LogFile" />
+	</logger>
+	<logger name="org.snmp4j">
+		<level value="info" />
+		<appender-ref ref="Console" />
+	</logger>
+	<logger name="org.apache">
+		<level value="info" />
+		<appender-ref ref="Console" />
+	</logger>
+	<root>
+		<level value="debug" />
+		<appender-ref ref="Console" />
+	</root>
+</log4j:configuration>
